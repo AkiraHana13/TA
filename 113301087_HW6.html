@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+	<h1>113301087_HW6_1A2B</h1>
+	<input type="text" id="input"placeholder="請輸入4個不重複的數字">
+	<input type="button"value="猜!" onclick="inputValue()">
+	<h2>遊戲紀錄:</h2>
+	<div id="record">
+	</div>
+	<script>
+		var input;
+		var password=generatePassword();
+		var j=1;
+		function inputValue(){
+			input=document.getElementById('input').value;
+			if(input.length!==4){
+				alert('輸入有誤!');
+				const inputValue=document.getElementById('input');
+				inputValue.value="";
+			}
+			else if(isNaN(input)){
+				alert('輸入有誤!');
+				const inputValue=document.getElementById('input');
+				inputValue.value="";
+			}
+			else if(!repeat(input)){
+				alert('輸入有誤!');
+				const inputValue=document.getElementById('input');
+				inputValue.value="";
+			}
+			else{
+				let array=input.split('');
+				var a=0;
+				var b=0;
+				for(let i=0;i<4;i++){
+					if(array[i]==password[i]){
+						a++;
+					}
+					if(password.includes(array[i])){
+						b++;
+					}
+				}
+				b-=a;
+				//輸出
+				output=`第 ${j} 次: ${input} => ${a}A${b}B<br>`;
+				const outputDiv=document.getElementById("record")
+				const inputValue=document.getElementById('input');
+				outputDiv.innerHTML+=output;
+				inputValue.value="";
+				j++;
+			}		
+		}
+		//數字不重複
+		function repeat(number) {
+    		const numStr = number.toString();
+   			const repeat = new Set(numStr);
+  			return repeat.size == numStr.length;
+		}
+		//產生不重複4位亂數
+		function generatePassword() {
+    		const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    		for (let i = digits.length - 1; i > 0; i--) {
+        		const randomIndex = Math.floor(Math.random() * (i + 1));
+        		[digits[i], digits[randomIndex]] = [digits[randomIndex], digits[i]];
+    		}
+    		const resultArray = digits.slice(0, 4);
+    		return resultArray.map(String);
+		}
+	</script>
+</body>
+</html>
