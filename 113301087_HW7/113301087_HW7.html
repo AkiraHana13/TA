@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<head><link rel="stylesheet"href="113301087_HW7.css"></head>
+<body><tr>
+<td ><div class="left-panel">
+<div class="photo-panel">
+<img src="./pic/scenery.jpg" alt="icon">
+</div>
+<div class="text-content">
+<p class="top">Leo<input type="button" value="edit" onclick="editName()">
+</p>
+<p><b>ABOUT ME</b>
+</p>
+I am a freshman in the Department of International Business at National Chengchi University.I am very interested in studying programming and computer science fundamentals.I have experience in writing java,HTML,CSS and C++.
+<p><b>CONTACT</b>
+</p>
+<p>113301087@nccu.edu.tw</p>
+<img src="./pic/nccu_logo.png" alt="NCCU Logo" width="90%">
+</div>
+</div></td>
+<td><div class="right-panel">
+<div class="title">
+<h2>Education<hr>
+</h2>
+<div class="year">
+   <div class="date">2024 - now</div>
+  <div class="description">
+     National Chengchi University, Department of IB<br>International Business
+    </div>
+ </div>
+ <div class="year">
+    <div class="date">2022 - 2024</div>
+    <div class="description">
+      Yilan Senior High School<br>
+      No Participated in computer science club
+    </div>
+</div>
+  <div class="year">
+    <div class="date">2019 - 2022</div>
+    <div class="description">
+     Middle School Graduation<br>
+      Started developing an interest in computer science
+    </div>
+  </div>
+<h2>HomeworkList<hr>
+</h2>
+<div class="year">
+    <div class="date">HW1</div>
+    <div class="description">
+     <a href="https://github.com/AkiraHana13/TA/tree/main/113301087_HW1">https://github.com/AkiraHana13/TA/tree/main/113301087_HW1</a>
+    </div>
+  </div>
+  <div class="year">
+    <div class="date">HW2</div>
+    <div class="description">
+     <a href="https://github.com/AkiraHana13/TA/tree/main/113301087_HW2">https://github.com/AkiraHana13/TA/tree/main/113301087_HW2</a>
+    </div>
+  </div>
+  <div class="year">
+    <div class="date">HW3</div>
+    <div class="description">
+     <a href="https://github.com/AkiraHana13/TA/tree/main/113301087_HW3">https://github.com/AkiraHana13/TA/tree/main/113301087_HW3</a>
+    </div>
+  </div>
+  <div class="year">
+    <div class="date">HW4</div>
+    <div class="description">
+     <a href="https://github.com/AkiraHana13/TA/tree/main/113301087_HW4">https://github.com/AkiraHana13/TA/tree/main/113301087_HW4</a>
+    </div>
+  </div>
+<h2>Favorite Music<hr>
+</h2>
+<div class="music">
+            <a href="https://youtu.be/BRir0qs538Q?si=-vJupRu7dqhf9yhN">
+                <img src="./pic/Youtube.jpg"width="40%"alt="修練愛情">修練愛情
+            </a>
+            <a href="https://youtu.be/by4SYYWlhEs?si=AzmdN4xIcOmfYzfp">
+                <img src="./pic/Youtube.jpg"width="40%"alt="夜に駆ける">夜に駆ける
+            </a>
+            <a href="https://youtu.be/olWvy0PiLfA?si=zdCBcm_RQyTQO3rT">
+                <img src="./pic/Youtube.jpg"width="40%"alt="くらべられっ子">くらべられっ子
+            </a>
+            <a href="https://youtu.be/dDR1DFtik0E?si=yGljGRL18yX7CD7b">
+                <img src="./pic/Youtube.jpg"width="40%"alt="firework festival">firework festival
+            </a>
+        </div class="button">
+        <div><input type="button" value="add" onclick="addmusic()">
+        </div>
+        <p class="note">
+            Note:I have no idea about note.
+        </p>
+</div>
+</div></td>
+</tr>
+<script>
+	function editName() {
+    var nameElement = document.querySelector(".top");
+    var currentName = nameElement.childNodes[0].textContent.trim();
+    nameElement.innerHTML = "";
+    var inputField = document.createElement("input");
+    inputField.type = "text";
+    inputField.value = currentName;
+    var saveButton = document.createElement("input");
+    saveButton.type = "button";
+    saveButton.value = "save";
+    nameElement.appendChild(inputField);
+    nameElement.appendChild(saveButton);
+    saveButton.addEventListener("click", function () {
+        var newName = inputField.value.trim();
+        if (newName !== "") {
+            nameElement.innerHTML = newName + ' <input type="button" value="edit" onclick="editName()">';
+        } else {
+            alert("名稱不能為空!");
+            inputField.focus();
+        }
+    });
+}
+function addmusic() {
+    var musicContainer = document.querySelector(".music");
+    if (!document.querySelector(".add-music-form")) {
+        var formContainer = document.createElement("div");
+        formContainer.classList.add("add-music-form");
+        var urlInput = document.createElement("input");
+        urlInput.type = "text";
+        urlInput.placeholder = "Enter music URL";
+        var nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.placeholder = "Enter song name";
+        var saveButton = document.createElement("input");
+        saveButton.type = "button";
+        saveButton.value = "Save";
+        saveButton.onclick = function() {
+            var url = urlInput.value.trim();
+            var name = nameInput.value.trim();
+            if (url && name) {
+                var newMusic = document.createElement("a");
+                newMusic.href = url;
+                newMusic.target = "_blank";
+                newMusic.innerHTML = `<img src="./pic/Youtube.jpg" width="40%" alt="${name}">${name}`;
+                musicContainer.appendChild(newMusic);
+                formContainer.remove();
+            } else {
+                alert("Please fill in both fields!");
+            }
+        };
+        formContainer.appendChild(urlInput);
+        formContainer.appendChild(nameInput);
+        formContainer.appendChild(saveButton);
+        musicContainer.appendChild(formContainer);
+    }
+}
+</script>
+
+</body>
+</html>
