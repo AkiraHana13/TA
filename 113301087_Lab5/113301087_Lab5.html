@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        <input id="math" type="number" placeholder="Math">
+        <input id="eng" type="number" placeholder="English">
+        <input type="button" value="Submit" onclick="submit()">
+    </div>
+    <div id="in">
+        <table id="scoresTable" border="1">
+            <tr>
+                <th>#</th>
+                <th>Math</th>
+                <th>English</th>
+                <th>Average</th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var matharr = [60, 100, 40];
+        var engarr = [70, 80, 70];
+        var avgarr = [65.00, 90.00, 55.00];
+
+        function updateTable() {
+            var table = document.getElementById("scoresTable");
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+            for (let i = 0; i < matharr.length; i++) {
+                let row = table.insertRow();
+                row.insertCell(0).innerText = i + 1;
+                row.insertCell(1).innerText = matharr[i]; 
+                row.insertCell(2).innerText = engarr[i]; 
+                row.insertCell(3).innerText = avgarr[i].toFixed(2); 
+            }
+            let totalMath = matharr.reduce((a, b) => a + b, 0) / matharr.length;
+            let totalEng = engarr.reduce((a, b) => a + b, 0) / engarr.length;
+            let totalAvg = avgarr.reduce((a, b) => a + b, 0) / avgarr.length;
+            let row = table.insertRow();
+            row.insertCell(0).innerText = "Average";
+            row.insertCell(1).innerText = totalMath.toFixed(2); 
+            row.insertCell(2).innerText = totalEng.toFixed(2); 
+            row.insertCell(3).innerText = totalAvg.toFixed(2); 
+        }
+
+        function submit() {
+            var mathInput = document.getElementById('math').value;
+            var engInput = document.getElementById('eng').value;
+            var math = parseInt(mathInput);
+            var eng = parseInt(engInput);
+
+            if (!isNaN(math) && !isNaN(eng)) {
+                matharr.push(math);
+                engarr.push(eng);
+                var avg = (math + eng) / 2;
+                avgarr.push(avg);
+                updateTable();
+            } else {
+                alert("請輸入正確數字");
+            }
+            document.getElementById('math').value = "";
+            document.getElementById('eng').value = "";
+        }
+        updateTable();
+    </script>
+</body>
+</html>
